@@ -6,6 +6,7 @@ TODO
 
 - Refactoring lcm and publish on github.  Now, lcm install method is too old.
 - Use Cython to call lcm.  Maybe Cython is most useful to call a module implemented by c language.
+- version control and publish to PyPI
 
 
 ********************************
