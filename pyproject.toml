@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "lcm"
+version = "0.1.0"
+description = "python wrapper for LCM (Linear time Closed itemset Miner) ver.5"
+authors = ["YuseiYokoyama <yusei_yokoyama@pkshatech.com>"]
+license = "MIT license"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
