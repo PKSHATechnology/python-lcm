@@ -23,7 +23,7 @@ max waiting time is `timeout * try_count`.
 timeout: seconds
 try_count: depth of binary search. minsup is seeked in units of 6.25% when try_count is 4.
 """
-def run_auto(data, timeout=20, try_count=4):
+def run_auto(data, timeout=20, try_count=4, flg_report=False):
 
     @timeout_decorator.timeout(timeout)
     def timeout_lcm(minsup):
@@ -36,14 +36,14 @@ def run_auto(data, timeout=20, try_count=4):
     for i in range(try_count):
         d *= 2
         unit = len(data) // d
-        print(f"{i}-th time try. minsup:{minsup}")
+        if flg_report: print(f"{i}-th time try. minsup:{minsup}")
         try:
             timeout_lcm(minsup)
         except timeout_decorator.TimeoutError:
-            print("  timeout")
+            if flg_report: print("  timeout")
             minsup += unit
         else:
-            print("  ended")
+            if flg_report: print("  ended")
             saved = arrange_output()
             minsup -= unit
             if minsup <= 0:

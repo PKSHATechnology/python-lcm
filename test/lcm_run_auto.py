@@ -22,10 +22,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     data = make_random_data()
-    minsup, result = lcm.run_auto(data, timeout=1)
+    minsup, result = lcm.run_auto(data, timeout=1, flg_report=True)
     print(f'minsup', minsup) # debug
-    print('result') # debug
-    pp(result) # debug
+    print('result[:2]') # debug
+    pp(result[:2]) # debug
 
     print('\33[32m' + 'end' + '\033[0m')
 
