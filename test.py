@@ -28,6 +28,10 @@ if __name__ == '__main__':
             ]
     assert result == correct_answer
 
+    minsup, result = lcm.run_auto(data)
+    print(f'minsup', minsup) # debug
+    print('result') # debug
+    pp(result) # debug
 
     print('\33[32m' + 'end' + '\033[0m')
 
