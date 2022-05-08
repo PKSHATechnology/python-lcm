@@ -21,7 +21,7 @@ class ItemsetPattern:
         self.hit = hit # contains itemset ids which have this pattern # itemset id starts from 0
 
     def __repr__(self):
-        return f"freq:{self.freqency}, items:{self.items}, hit:{self.hit};"
+        return f"(freq:{self.freqency}, items:{self.items}, hit:{self.hit})"
 
     def __eq__(self, other):
         conditions = (
