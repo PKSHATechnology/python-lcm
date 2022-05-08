@@ -32,10 +32,11 @@ def run_auto(data, timeout=20, try_count=4):
     prepare_input(data)
     d = 2
     minsup = len(data) // d
+    saved = None
     for i in range(try_count):
         d *= 2
         unit = len(data) // d
-        print("{i}-th time try. minsup:{minsup}")
+        print(f"{i}-th time try. minsup:{minsup}")
         try:
             timeout_lcm(minsup)
         except timeout_decorator.TimeoutError:
@@ -43,10 +44,11 @@ def run_auto(data, timeout=20, try_count=4):
             minsup += unit
         else:
             print("  ended")
+            saved = arrange_output()
             minsup -= unit
             if minsup <= 0:
                 minsup = 1
-    return minsup, arrange_output()
+    return minsup, saved
 
 
 
