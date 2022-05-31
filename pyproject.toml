@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lcm"
-version = "0.2.1"
+version = "0.2.2"
 description = "python wrapper for LCM (Linear time Closed itemset Miner) ver.5"
 authors = ["YuseiYokoyama <yusei_yokoyama@pkshatech.com>"]
 license = "MIT license"
