@@ -19,6 +19,8 @@ Linear time Closed itemset Miner (Uno.)
 ref.
     http://research.nii.ac.jp/~uno/codes-j.htm
     http://research.nii.ac.jp/~uno/code/lcm.html
+
+return: flg_successed, msg
 """
 def lcm(minsup):
     cmd = [
@@ -30,7 +32,13 @@ def lcm(minsup):
             ]
     fname_out = open(os.path.join(working_dir, "tmp_lcm_stdout.txt"), "w")
     fname_err = open(os.path.join(working_dir, "tmp_lcm_stderr.txt"), "w")
-    subprocess.run(cmd, stdout=fname_out, stderr=fname_err)
+    res = subprocess.run(cmd, stdout=fname_out, stderr=fname_err)
+    if res.returncode == -11:
+        return False, "there is no frequent item"
+    if res.returncode != 0:
+        print('res', res) # debug
+        raise RuntimeError("lcm command raise error. Please look at _lcm_working_dir/tmp_lcm_stderr.txt")
+    return True, ""
 
 def prepare_input(data):
     lines = []

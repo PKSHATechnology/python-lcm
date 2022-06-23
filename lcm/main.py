@@ -13,7 +13,9 @@ return: [ItemsetPattern, ... ]
 """
 def run(data, minsup):
     prepare_input(data)
-    lcm(minsup)
+    flg_successed, msg = lcm(minsup)
+    if not flg_successed:
+        raise RuntimeError(msg)
     return arrange_output()
 
 """
