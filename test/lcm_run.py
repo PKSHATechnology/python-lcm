@@ -20,11 +20,11 @@ if __name__ == '__main__':
     pp(result) # debug
 
     correct_answer = [
-            lcm.ItemsetPattern(5, {5}, {0, 1, 2, 3, 4}),
-            lcm.ItemsetPattern(4, {3, 5}, {0, 1, 2, 4}),
-            lcm.ItemsetPattern(3, {5, 6}, {0, 2, 3}),
-            lcm.ItemsetPattern(3, {8, 3, 5}, {0, 1, 4}),
-            lcm.ItemsetPattern(3, {10, 5}, {0, 1, 3}),
+            lcm.ItemsetPattern({5}, {0, 1, 2, 3, 4}),
+            lcm.ItemsetPattern({3, 5}, {0, 1, 2, 4}),
+            lcm.ItemsetPattern({5, 6}, {0, 2, 3}),
+            lcm.ItemsetPattern({8, 3, 5}, {0, 1, 4}),
+            lcm.ItemsetPattern({10, 5}, {0, 1, 3}),
             ]
     assert result == correct_answer
 

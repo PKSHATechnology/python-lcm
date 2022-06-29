@@ -54,7 +54,7 @@ def arrange_output():
     while i < len(lines):
         freq, items = parse_line(lines[i]); i += 1;
         hit_list = parse_hit_line(lines[i]); i += 1;
-        pattern = ItemsetPattern(freq, items, hit_list)
+        pattern = ItemsetPattern(items, hit_list)
         pattern_list.append(pattern)
     return pattern_list
 
