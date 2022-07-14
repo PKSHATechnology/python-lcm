@@ -15,6 +15,8 @@ def run(data, minsup):
     prepare_input(data)
     flg_successed, msg = lcm(minsup)
     if not flg_successed:
+        if msg == "there is no frequent item":
+            raise ValueError(msg)
         raise RuntimeError(msg)
     return arrange_output()
 
