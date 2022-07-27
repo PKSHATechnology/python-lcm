@@ -13,7 +13,7 @@ TODO
 Install
 ********************************
 
-To install LCM ver. 5.3., run `install/install_lcm.sh`.
+To install LCM ver. 5.3., run :code:`install/install_lcm.sh`.
 If you need, set `INSTALL_PATH` in shell script.
 ref. http://research.nii.ac.jp/~uno/codes-j.htm
 
