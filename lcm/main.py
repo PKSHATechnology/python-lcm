@@ -7,7 +7,7 @@ import timeout_decorator
 
 # mine
 from .structure import Itemset, ItemsetPattern
-from .adapter import prepare_input, lcm, arrange_output
+from .adapter import prepare_input, lcm, arrange_output, NoFrequentItemError
 
 """
 data: [Itemset, ... ]
@@ -44,7 +44,7 @@ def run_auto(data, timeout=20, try_count=4, flg_report=False):
         except timeout_decorator.TimeoutError:
             logger.info("  timeout")
             minsup += unit
-        except ValueError as err:
+        except NoFrequentItemError as err:
             logger.info(str(err))
             minsup -= unit
         else:

@@ -13,6 +13,9 @@ fname_input_tmp = os.path.join(working_dir, "tmp_lcm_input.dat")
 fname_output_tmp = os.path.join(working_dir, "tmp_lcm_output.dat")
 
 
+class NoFrequentItemError(ValueError):
+    pass
+
 """
 Linear time Closed itemset Miner (Uno.)
 
@@ -35,7 +38,7 @@ def lcm(minsup):
     fname_err = open(os.path.join(working_dir, "tmp_lcm_stderr.txt"), "w")
     res = subprocess.run(cmd, stdout=fname_out, stderr=fname_err)
     if res.returncode == -11:
-        raise ValueError( "there is no frequent item") #TODO raise your own Error class
+        raise NoFrequentItemError( "there is no frequent item") #TODO raise your own Error class
     if res.returncode != 0:
         print('res', res) # debug
         raise RuntimeError("lcm command raise error. Please look at _lcm_working_dir/tmp_lcm_stderr.txt")
