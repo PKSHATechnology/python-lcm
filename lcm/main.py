@@ -1,5 +1,7 @@
 from pprint import pprint as pp
 from pprint import pformat as pf
+import logging
+logger = logging.getLogger(__name__)
 
 import timeout_decorator
 
@@ -36,17 +38,17 @@ def run_auto(data, timeout=20, try_count=4, flg_report=False):
     for i in range(try_count):
         d *= 2
         unit = len(data) // d
-        if flg_report: print(f"{i}-th time try. minsup:{minsup}")
+        logger.info(f"{i}-th time try. minsup:{minsup}")
         try:
             timeout_lcm(minsup)
         except timeout_decorator.TimeoutError:
-            if flg_report: print("  timeout")
+            logger.info("  timeout")
             minsup += unit
-        except ValueError:
-            if flg_report: print(err)
+        except ValueError as err:
+            logger.info(str(err))
             minsup -= unit
         else:
-            if flg_report: print("  ended")
+            logger.info("  ended")
             saved = arrange_output()
             minsup -= unit
         if minsup <= 0:
