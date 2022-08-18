@@ -22,5 +22,7 @@ if __name__ == '__main__':
     except ValueError as e:
         assert str(e) == "there is no frequent item"
 
+    lcm.run_auto(data)
+
     print('\33[32m' + 'end' + '\033[0m')
 

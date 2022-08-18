@@ -8,7 +8,7 @@ import subprocess
 from .structure import Itemset, ItemsetPattern
 
 working_dir = "_lcm_working_dir"
-subprocess.call(["mkdir", "-p", working_dir])
+os.makedirs(working_dir, exist_ok=True)
 fname_input_tmp = os.path.join(working_dir, "tmp_lcm_input.dat")
 fname_output_tmp = os.path.join(working_dir, "tmp_lcm_output.dat")
 
@@ -23,6 +23,7 @@ ref.
 return: flg_successed, msg
 """
 def lcm(minsup):
+    if os.path.exists(fname_output_tmp): os.remove(fname_output_tmp)
     cmd = [
             "lcm",
             "CQI",
