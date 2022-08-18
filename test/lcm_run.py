@@ -15,7 +15,7 @@ if __name__ == '__main__':
             lcm.Itemset((   1,          5, 6,       9, 10)),
             lcm.Itemset((   1,    3, 4, 5,       8,      )),
             ]
-    result = lcm.run(data, 3)
+    result = lcm.run(data, 1)
     print('result') # debug
     pp(result) # debug
 

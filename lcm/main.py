@@ -13,11 +13,7 @@ return: [ItemsetPattern, ... ]
 """
 def run(data, minsup):
     prepare_input(data)
-    flg_successed, msg = lcm(minsup)
-    if not flg_successed:
-        if msg == "there is no frequent item":
-            raise ValueError(msg) #TODO raise your own Error class 
-        raise RuntimeError(msg)
+    lcm(minsup)
     return arrange_output()
 
 """
@@ -46,12 +42,17 @@ def run_auto(data, timeout=20, try_count=4, flg_report=False):
         except timeout_decorator.TimeoutError:
             if flg_report: print("  timeout")
             minsup += unit
+        except ValueError:
+            if flg_report: print(err)
+            minsup -= unit
         else:
             if flg_report: print("  ended")
             saved = arrange_output()
             minsup -= unit
-            if minsup <= 0:
-                minsup = 1
+        if minsup <= 0:
+            minsup = 1
+    if saved is None:
+        raise ValueError("Failed to find minsup automatically")
     return minsup, saved
 
 
