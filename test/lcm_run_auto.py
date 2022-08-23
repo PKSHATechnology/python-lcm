@@ -1,6 +1,14 @@
 from pprint import pprint as pp
 from pprint import pformat as pf
 
+import logging
+logger = logging.getLogger()
+#handler = logging.FileHandler(filename="log")
+handler = logging.StreamHandler()
+handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)8s %(message)s'))
+logger.addHandler(handler)
+logger.setLevel(logging.DEBUG)
+
 import random
 
 import lcm
@@ -22,10 +30,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     data = make_random_data()
-    minsup, result = lcm.run_auto(data, timeout=1, flg_report=True)
+    minsup, result = lcm.run_auto(data, timeout=7, try_count=5)
     print(f'minsup', minsup) # debug
-    print('result[:2]') # debug
-    pp(result[:2]) # debug
+    #print('result[:2]') # debug
+    #pp(result[:2]) # debug
 
     print('\33[32m' + 'end' + '\033[0m')
 
