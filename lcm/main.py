@@ -27,7 +27,7 @@ try_count: depth of binary search. minsup is seeked in units of 6.25% when try_c
 """
 def run_auto(data, timeout=20, try_count=4):
 
-    @timeout_decorator.timeout(timeout)
+    @timeout_decorator.timeout(timeout, use_signals=False)
     def timeout_lcm(minsup):
         lcm(minsup)
 
