@@ -3,7 +3,7 @@ from pprint import pformat as pf
 import logging
 logger = logging.getLogger(__name__)
 
-import timeout_decorator
+import wrapt_timeout_decorator
 
 # mine
 from .structure import Itemset, ItemsetPattern
@@ -27,7 +27,7 @@ try_count: depth of binary search. minsup is seeked in units of 6.25% when try_c
 """
 def run_auto(data, timeout=20, try_count=4):
 
-    @timeout_decorator.timeout(timeout, use_signals=False)
+    @wrapt_timeout_decorator.timeout(timeout)
     def timeout_lcm(minsup):
         lcm(minsup)
 
@@ -41,7 +41,7 @@ def run_auto(data, timeout=20, try_count=4):
         logger.info(f"{i}-th time try. minsup:{minsup}")
         try:
             timeout_lcm(minsup)
-        except timeout_decorator.TimeoutError:
+        except TimeoutError:
             logger.info("  timeout")
             minsup += unit
         except NoFrequentItemError as err:
