@@ -23,9 +23,9 @@ seek suit minsup by binary search.
 max waiting time is `timeout * try_count`.
 
 timeout: seconds
-try_count: depth of binary search. minsup is seeked in units of 6.25% when try_count is 4.
+try_count: depth of binary search. minsup is seeked in units of 6.25% when try_count is 4, and 1.5625% when try_count is 6.
 """
-def run_auto(data, timeout=20, try_count=4):
+def run_auto(data, timeout=20, try_count=6):
 
     @wrapt_timeout_decorator.timeout(timeout)
     def timeout_lcm(minsup):
