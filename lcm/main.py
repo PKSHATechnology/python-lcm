@@ -54,9 +54,9 @@ def run_auto(data, timeout=20, try_count=6):
         if minsup <= 0:
             minsup = 1
     if saved is None:
-        raise ValueError("Failed to find minsup automatically")
+        raise FailedAutoMinsupError("Failed to find minsup automatically")
     return minsup, saved
 
-
-
+class FailedAutoMinsupError(ValueError):
+    pass
 
