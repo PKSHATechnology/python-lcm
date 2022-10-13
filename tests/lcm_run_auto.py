@@ -23,17 +23,20 @@ def make_random_data():
         data.append(set(one))
     return data
 
+def test_run_auto():
+    data = make_random_data()
+    minsup, result = lcm.run_auto(data, timeout=7, try_count=5)
+    print(f'minsup', minsup) # debug
+    #print('result[:2]') # debug
+    #pp(result[:2]) # debug
+
 
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser("Test lcm")
     args = parser.parse_args()
 
-    data = make_random_data()
-    minsup, result = lcm.run_auto(data, timeout=7, try_count=5)
-    print(f'minsup', minsup) # debug
-    #print('result[:2]') # debug
-    #pp(result[:2]) # debug
+    test_run_auto()
 
     print('\33[32m' + 'end' + '\033[0m')
 

@@ -3,11 +3,7 @@ from pprint import pformat as pf
 
 import lcm
 
-if __name__ == '__main__':
-    import argparse
-    parser = argparse.ArgumentParser("Test lcm")
-    args = parser.parse_args()
-
+def get_data():
     data = [
             lcm.Itemset((0, 1)),
             lcm.Itemset((2, 3)),
@@ -17,17 +13,33 @@ if __name__ == '__main__':
             ]
     print('data') # debug
     pp(data) # debug
+    return data
+
+def test_error_no_freq():
+    data = get_data()
     try:
         result = lcm.run(data, 2)
-    except ValueError as e:
+        assert False
+    except lcm.NoFrequentItemError as e:
         assert str(e) == "there is no frequent item"
 
+def test_failed_error():
+    data = get_data()
     minsup, result = lcm.run_auto(data)
-
     try:
         result = lcm.run_auto(data, try_count=1)
-    except ValueError as e:
+        assert False
+    except lcm.FailedAutoMinsupError as e:
         assert str(e) == "Failed to find minsup automatically"
+
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser("Test lcm")
+    args = parser.parse_args()
+
+    test_error_no_freq()
+    test_failed_error()
 
     print('\33[32m' + 'end' + '\033[0m')
 
