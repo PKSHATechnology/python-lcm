@@ -11,7 +11,7 @@ def test_lcm():
             lcm.Itemset((   1,          5, 6,       9, 10)),
             lcm.Itemset((   1,    3, 4, 5,       8,      )),
             ]
-    result = lcm.run(data, 1)
+    result = lcm.run(data, 3)
     print('result') # debug
     pp(result) # debug
 
@@ -22,6 +22,8 @@ def test_lcm():
             lcm.ItemsetPattern({8, 3, 5}, {0, 1, 4}),
             lcm.ItemsetPattern({10, 5}, {0, 1, 3}),
             ]
+    print('correct_answer') # debug
+    pp(correct_answer) # debug
     assert result == correct_answer
 
 
