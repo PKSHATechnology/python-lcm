@@ -7,16 +7,19 @@ import wrapt_timeout_decorator
 
 # mine
 from .structure import Itemset, ItemsetPattern
-from .adapter import prepare_input, lcm, arrange_output, NoFrequentItemError
+from .adapter import prepare_working_dir, delete_working_dir, prepare_input, lcm, arrange_output, NoFrequentItemError
 
 """
 data: [Itemset, ... ]
 return: [ItemsetPattern, ... ]
 """
 def run(data, minsup):
+    prepare_working_dir()
     prepare_input(data)
     lcm(minsup)
-    return arrange_output()
+    result = arrange_output()
+    delete_working_dir()
+    return result
 
 """
 seek suit minsup by binary search.
@@ -31,6 +34,7 @@ def run_auto(data, timeout=20, try_count=6):
     def timeout_lcm(minsup):
         lcm(minsup)
 
+    prepare_working_dir()
     prepare_input(data)
     d = 2
     minsup = len(data) // d
@@ -55,6 +59,7 @@ def run_auto(data, timeout=20, try_count=6):
             minsup = 1
     if saved is None:
         raise FailedAutoMinsupError("Failed to find minsup automatically")
+    delete_working_dir()
     return minsup, saved
 
 class FailedAutoMinsupError(ValueError):

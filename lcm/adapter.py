@@ -2,19 +2,34 @@ from pprint import pprint as pp
 from pprint import pformat as pf
 
 import os
+import shutil
+import uuid
 import subprocess
 
 # mine
 from .structure import Itemset, ItemsetPattern
 
-working_dir = "_lcm_working_dir"
-os.makedirs(working_dir, exist_ok=True)
-fname_input_tmp = os.path.join(working_dir, "tmp_lcm_input.dat")
-fname_output_tmp = os.path.join(working_dir, "tmp_lcm_output.dat")
+working_dir_base = "_lcm_working_dir"
+# set by prepare_working_dir
+working_dir = None
+fname_input_tmp = None
+fname_output_tmp = None
 
 
 class NoFrequentItemError(ValueError):
     pass
+
+def prepare_working_dir():
+    global working_dir
+    global fname_input_tmp
+    global fname_output_tmp
+    working_dir = os.path.join(working_dir_base, str(uuid.uuid4()))
+    os.makedirs(working_dir, exist_ok=True)
+    fname_input_tmp = os.path.join(working_dir, "tmp_lcm_input.dat")
+    fname_output_tmp = os.path.join(working_dir, "tmp_lcm_output.dat")
+
+def delete_working_dir():
+    shutil.rmtree(working_dir)
 
 """
 Linear time Closed itemset Miner (Uno.)
