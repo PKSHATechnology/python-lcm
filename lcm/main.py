@@ -39,28 +39,33 @@ def run_auto(data, timeout=20, try_count=6):
     d = 2
     minsup = len(data) // d
     saved = None
+    saved_minsup = None
     for i in range(try_count):
         d *= 2
         unit = len(data) // d
-        logger.info(f"{i}-th time try. minsup:{minsup}")
+        if unit == 0: unit = 1
+        print('unit', unit) # debug
+        logger.debug(f"{i}-th time try. minsup:{minsup}")
         try:
             timeout_lcm(minsup)
         except TimeoutError:
-            logger.info("  timeout")
+            logger.debug("  timeout")
             minsup += unit
         except NoFrequentItemError as err:
-            logger.info(str(err))
+            logger.debug(str(err))
             minsup -= unit
         else:
-            logger.info("  ended")
+            logger.debug("  ended")
             saved = arrange_output()
+            saved_minsup = minsup
             minsup -= unit
         if minsup <= 0:
-            minsup = 1
+            break
     if saved is None:
         raise FailedAutoMinsupError("Failed to find minsup automatically")
+    logger.info(f"auto seeded minsup:{saved_minsup}")
     delete_working_dir()
-    return minsup, saved
+    return saved_minsup, saved
 
 class FailedAutoMinsupError(ValueError):
     pass
