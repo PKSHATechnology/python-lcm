@@ -44,7 +44,6 @@ def run_auto(data, timeout=20, try_count=6):
         d *= 2
         unit = len(data) // d
         if unit == 0: unit = 1
-        print('unit', unit) # debug
         logger.debug(f"{i}-th time try. minsup:{minsup}")
         try:
             timeout_lcm(minsup)
