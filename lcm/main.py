@@ -44,7 +44,8 @@ def run_auto(data, min_minsup=2, *, timeout=20, try_count=6):
     bef_minsup = None
     for i in range(try_count):
         d *= 2
-        unit = len(data) // d
+        unit = round(len(data) / d)
+        if unit == 0: unit = 1
         minsup = minsup + next_sign * unit
         if minsup < min_minsup:
             minsup = min_minsup

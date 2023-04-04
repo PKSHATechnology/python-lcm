@@ -30,6 +30,19 @@ def test_run_auto():
     #print('result[:2]') # debug
     #pp(result[:2]) # debug
 
+def test_run_auto_30():
+    data = [
+            lcm.Itemset((         3,    5, 6, 7, 8,    10)),
+            lcm.Itemset((      2, 3,    5,    7, 8,    10)),
+            lcm.Itemset((0,       3,    5, 6,            )),
+            lcm.Itemset((   1,          5, 6,       9, 10)),
+            lcm.Itemset((   1,    3, 4, 5,       8,      )),
+            ] * 6
+    minsup, result = lcm.run_auto(data, timeout=7, try_count=5)
+    print(f'minsup', minsup) # debug
+    assert minsup == 2
+    assert lcm.run_auto.tried_count == 4
+
 def test_run_auto_small():
     data = make_random_data(10)
     minsup, result = lcm.run_auto(data, timeout=7, try_count=5)
@@ -60,8 +73,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     #test_run_auto()
+    test_run_auto_30()
     #test_run_auto_small()
-    test_run_auto_2()
+    #test_run_auto_2()
     #test_min_minsup()
 
     print('\33[32m' + 'end' + '\033[0m')
