@@ -48,7 +48,6 @@ def run_auto(data, min_minsup=2, *, timeout=20, try_count=6):
         minsup = minsup + next_sign * unit
         if minsup < min_minsup:
             minsup = min_minsup
-        print('bef_minsup, minsup', bef_minsup, minsup) # debug
         if bef_minsup == minsup:
             break
         logger.debug(f"{i+1}-th time try. minsup:{minsup}")
