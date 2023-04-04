@@ -39,7 +39,7 @@ def test_run_auto_small():
 
 def test_min_minsup():
     data = make_random_data(100)
-    min_minsup = 0
+    min_minsup = 20
     minsup, result = lcm.run_auto(data, min_minsup, timeout=7, try_count=5)
     print(f'minsup', minsup) # debug
     assert minsup == min_minsup
@@ -52,9 +52,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser("Test lcm")
     args = parser.parse_args()
 
-    #test_run_auto()
+    test_run_auto()
     test_run_auto_small()
-    #test_min_minsup()
+    test_min_minsup()
 
     print('\33[32m' + 'end' + '\033[0m')
 
