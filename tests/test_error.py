@@ -25,7 +25,6 @@ def test_error_no_freq():
 
 def test_failed_error():
     data = get_data()
-    minsup, result = lcm.run_auto(data)
     try:
         result = lcm.run_auto(data, try_count=1)
         assert False

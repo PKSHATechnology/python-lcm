@@ -33,7 +33,7 @@ def test_run_auto_small():
     data = make_random_data(10)
     minsup, result = lcm.run_auto(data, timeout=7, try_count=5)
     print(f'minsup', minsup) # debug
-    assert minsup == 1
+    assert minsup == 2
     #print('result') # debug
     #pp(result) # debug
 

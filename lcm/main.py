@@ -28,7 +28,7 @@ max waiting time is `timeout * try_count`.
 timeout: seconds
 try_count: depth of binary search. minsup is seeked in units of 6.25% when try_count is 4, and 1.5625% when try_count is 6.
 """
-def run_auto(data, timeout=20, try_count=6):
+def run_auto(data, min_minsup=2, *, timeout=20, try_count=6):
 
     @wrapt_timeout_decorator.timeout(timeout)
     def timeout_lcm(minsup):
@@ -44,7 +44,10 @@ def run_auto(data, timeout=20, try_count=6):
         d *= 2
         unit = len(data) // d
         if unit == 0: unit = 1
+        if minsup < min_minsup:
+            minsup = min_minsup
         logger.debug(f"{i}-th time try. minsup:{minsup}")
+        print(f"{i}-th time try. minsup:{minsup}")
         try:
             timeout_lcm(minsup)
         except TimeoutError:
@@ -55,10 +58,11 @@ def run_auto(data, timeout=20, try_count=6):
             minsup -= unit
         else:
             logger.debug("  ended")
+            print("end")
             saved = arrange_output()
             saved_minsup = minsup
             minsup -= unit
-        if minsup <= 0:
+        if minsup < min_minsup:
             break
     if saved is None:
         raise FailedAutoMinsupError("Failed to find minsup automatically")
