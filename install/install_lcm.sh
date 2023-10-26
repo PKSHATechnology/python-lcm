@@ -3,7 +3,7 @@ SCRIPT_DIR=$(dirname $0)
 cd $SCRIPT_DIR
 
 WORKING_DIR="tmp_install_lcm"
-INSTALL_PATH="$PYENV_ROOT/shims"
+INSTALL_PATH="$HOME/.local/bin"
 
 mkdir "$WORKING_DIR"
 cd tmp_install_lcm
